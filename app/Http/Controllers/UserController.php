@@ -77,7 +77,7 @@ if($request->file('avatar')){
  $validated['password'] = bcrypt($request->password);
  $validated['email_verified_at'] = now();
 
-        DB::beginTransaction();
+       
          $user = User::create($validated);
      DB::commit();
      return to_route('user.index')->withSuccess('Data berhasil ditambahkan');

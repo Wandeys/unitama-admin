@@ -30,10 +30,16 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return to_route('dashboard.index')->withSuccess('Login Berhasil');
-           
         }
-
-        return back()->withError('Email atau Password Salah.')->onlyInput('email');
-           
+        return back()->withError('Email atau Password Salah.')->onlyInput('email');   
     }
+
+    public function logout(Request $request): RedirectResponse
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/')->withSuccess('Logout Berhasil');
+}
+
 }
